@@ -11,15 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/tasks', 'tasksController@index');
 
-    $tasks=[
-        'task1',
-        'task2',
-        'task3'
-    ];
-    return view('welcome', compact('tasks'));
-});
-Route::get('/about', function () {
-    return view('about');
-});
+
+Route::get('/tasks/{task}', 'tasksController@show');
+
+Route::get('/', 'PostsController@index');

@@ -7,10 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <ul>
-    <?php foreach ($tasks as $task) : ?>
-     <li> <a href='tasks/<?php echo $task->id ?>'> <?php echo $task->body ?>  </a></li>
-    <?php endforeach ?>
-    </ul>
+ <?php echo $task->body ?>
 </body>
 </html>
