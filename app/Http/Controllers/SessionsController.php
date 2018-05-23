@@ -40,7 +40,7 @@ class SessionsController extends Controller
 
                 return back(); 
         }
-
+        session()->flash('message','Gracias por entrar de nuevo!');
         return redirect('/');
     }
 }

@@ -23,10 +23,27 @@
   *{
     color:black;
   }
+  #flash-message {
+    bottom: 20px;
+    position: absolute;
+    right: 20px;
+    z-index: 10;
+    animation: flash-message 4s forwards;
+}
   </style>
 
     <div class="container">
     @include('layouts.nav')
+
+        @if($flash =  session('message'))
+
+        <div id="flash-message" class="alert alert-success">
+
+          {{$flash}}
+
+        </div>
+
+        @endif
 
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">

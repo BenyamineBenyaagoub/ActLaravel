@@ -12,13 +12,18 @@ class Post extends Model
 
     
 
-   public function comment(){
+   public function comments(){
        
        return $this->hasMany(Comment::class);
 
    }
 
 
+   public function tags(){
+
+    return $this->belongsToMany(Tag::class);
+
+}
 
    public function user(){
 
@@ -28,15 +33,21 @@ class Post extends Model
 
     public function scopeFilter($query, $filters)
             {
-            if (isset($filters['month'])) {
+
+            if (isset($filters['month'])) 
+            {
             $query->whereMonth('created_at', Carbon::parse($filters['month'])->month);
             }
 
-            if (isset($filters['year'])) {
+
+            if (isset($filters['year'])) 
+            {
             $query->whereYear('created_at', $filters['year']);
             }
 
-            if (isset($filters['recent'])) {
+
+            if (isset($filters['recent']))
+            {
             $query->where( 'created_at', '>', Carbon::now()->subDays(14));
             }
     }
@@ -45,7 +56,7 @@ class Post extends Model
 
     public static function archives(){
        
-           return static::selectRaw('year(created_at) year , monthname(created_at) month, count(*) published')
+        return static::selectRaw('year(created_at) year , monthname(created_at) month, count(*) published')
 
         ->groupBy('year','month')
 

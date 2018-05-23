@@ -26,6 +26,8 @@ class PostsController extends Controller
 
         //$posts = Post::orderBy('created_at','desc') ->filter(request(['month','year']))->get();
 
+     
+
         $posts = $this->posts->all();
         
         $archives = POST::archives();
@@ -53,22 +55,31 @@ class PostsController extends Controller
 
     public function store(){
 
+
         $this->validate(request(),[
             'title' => 'required',
             'body' => 'required'
         ]);
 
+
          auth()->user()->publish(
              new Post(request(['title','body']))
          );   
 
+ 
         //Post::create([
           //  'title' => request('title'),
             //'body' => request('body'),
             //'user_id' => auth()->id()
         //]);
-        
+
+    
+        session()->flash('message','Has creado nuevo Post!!!');
+
+
         return redirect('/');
+
+
     }
 
     
